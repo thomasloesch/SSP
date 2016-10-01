@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HotelReservationApp
 {
-    public partial class main : Form
+    public partial class MainForm : Form
     {
-        public main()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -23,6 +23,11 @@ namespace HotelReservationApp
         }
 
         private void main_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logInToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

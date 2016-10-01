@@ -28,21 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSubmit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtBxUsrName = new System.Windows.Forms.TextBox();
+            this.txtBxPass = new System.Windows.Forms.TextBox();
+            this.btnRegister = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnSubmit
             // 
-            this.button1.Location = new System.Drawing.Point(57, 126);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSubmit.Location = new System.Drawing.Point(57, 118);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(75, 23);
+            this.btnSubmit.TabIndex = 0;
+            this.btnSubmit.Text = "Login";
+            this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // label1
             // 
@@ -62,30 +64,42 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Password";
             // 
-            // textBox1
+            // txtBxUsrName
             // 
-            this.textBox1.Location = new System.Drawing.Point(16, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(156, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtBxUsrName.Location = new System.Drawing.Point(16, 38);
+            this.txtBxUsrName.Name = "txtBxUsrName";
+            this.txtBxUsrName.Size = new System.Drawing.Size(156, 20);
+            this.txtBxUsrName.TabIndex = 3;
             // 
-            // textBox2
+            // txtBxPass
             // 
-            this.textBox2.Location = new System.Drawing.Point(16, 83);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(156, 20);
-            this.textBox2.TabIndex = 4;
+            this.txtBxPass.Location = new System.Drawing.Point(16, 83);
+            this.txtBxPass.Name = "txtBxPass";
+            this.txtBxPass.PasswordChar = '*';
+            this.txtBxPass.Size = new System.Drawing.Size(156, 20);
+            this.txtBxPass.TabIndex = 4;
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(57, 147);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(75, 23);
+            this.btnRegister.TabIndex = 5;
+            this.btnRegister.Text = "Register";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // SignInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(188, 168);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(188, 188);
+            this.Controls.Add(this.btnRegister);
+            this.Controls.Add(this.txtBxPass);
+            this.Controls.Add(this.txtBxUsrName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSubmit);
             this.Name = "SignInForm";
             this.Text = "Log in";
             this.ResumeLayout(false);
@@ -95,10 +109,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtBxUsrName;
+        private System.Windows.Forms.TextBox txtBxPass;
+        private System.Windows.Forms.Button btnRegister;
     }
 }
