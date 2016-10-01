@@ -48,12 +48,22 @@ namespace HotelReservationApp
                 lblMessage.Text = "That name is already in use.";
             else
             {
+                dbReader.Close();
+
                 // Insert username into userTbl
                 sqlQuery = "INSERT INTO dbo.userTbl(UserName) VALUES(@userName);";
                 sqlCmd = new SqlCommand(sqlQuery, conn);
                 sqlCmd.Parameters.Add("@userName", SqlDbType.VarChar, 50);
                 sqlCmd.Parameters["@userName"].Value = txtBxName.Text;
                 sqlCmd.ExecuteNonQuery();
+
+                // Get Id of new user
+                sqlQuery = "SELECT Id FROM dbo.userTbl WHERE UserName = '" + txtBxName.Text + "';";
+                sqlCmd = new SqlCommand(sqlQuery, conn);
+                dbReader = sqlCmd.ExecuteReader();
+                dbReader.Read();
+                int user_Id = dbReader.GetInt32(0);
+                dbReader.Close();
 
                 try
                 {                
@@ -62,12 +72,15 @@ namespace HotelReservationApp
                     byte[] hash = SignInForm.GenerateSaltedHash(Encoding.UTF8.GetBytes(txtBxPass.Text), salt);
 
                     //  Insert hashed password (and salt) into passTbl
-                    sqlQuery = "INSERT INTO dbo.passTbl(Hash, Salt) VALUES('" + Convert.ToBase64String(hash) + "', '" + Convert.ToBase64String(salt) + "');";
+                    sqlQuery = "INSERT INTO dbo.passTbl(Usr_Id, Hash, Salt) VALUES(" + user_Id + ", '" + Convert.ToBase64String(hash) + "', '" + Convert.ToBase64String(salt) + "');";
                     sqlCmd = new SqlCommand(sqlQuery, conn);
                     sqlCmd.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
+                    // Ensure dataReader is closed
+                    dbReader.Close();
+
                     // Make sure UserName is removed from db if there
                     // is an exception when attempting to set password
                     sqlQuery = "DELETE FROM dbo.userTbl WHERE (UserName='" + txtBxName.Text + "');";
@@ -75,7 +88,6 @@ namespace HotelReservationApp
                     sqlCmd.ExecuteNonQuery();
 
                     // Close connections
-                    dbReader.Close();
                     conn.Close();
 
                     throw ex;

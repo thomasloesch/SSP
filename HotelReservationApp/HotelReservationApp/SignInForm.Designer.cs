@@ -31,7 +31,7 @@
             this.btnSubmit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtBxUsrName = new System.Windows.Forms.TextBox();
+            this.txtBxName = new System.Windows.Forms.TextBox();
             this.txtBxPass = new System.Windows.Forms.TextBox();
             this.btnRegister = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -64,12 +64,12 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Password";
             // 
-            // txtBxUsrName
+            // txtBxName
             // 
-            this.txtBxUsrName.Location = new System.Drawing.Point(16, 38);
-            this.txtBxUsrName.Name = "txtBxUsrName";
-            this.txtBxUsrName.Size = new System.Drawing.Size(156, 20);
-            this.txtBxUsrName.TabIndex = 3;
+            this.txtBxName.Location = new System.Drawing.Point(16, 38);
+            this.txtBxName.Name = "txtBxName";
+            this.txtBxName.Size = new System.Drawing.Size(156, 20);
+            this.txtBxName.TabIndex = 3;
             // 
             // txtBxPass
             // 
@@ -91,12 +91,13 @@
             // 
             // SignInForm
             // 
+            this.AcceptButton = this.btnSubmit;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(188, 188);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.txtBxPass);
-            this.Controls.Add(this.txtBxUsrName);
+            this.Controls.Add(this.txtBxName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSubmit);
@@ -112,7 +113,7 @@
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtBxUsrName;
+        private System.Windows.Forms.TextBox txtBxName;
         private System.Windows.Forms.TextBox txtBxPass;
         private System.Windows.Forms.Button btnRegister;
     }
