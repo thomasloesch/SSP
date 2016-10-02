@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeFrom = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeTo = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,26 +60,32 @@
             this.databaseSSPDataSet = new HotelReservationApp.DatabaseSSPDataSet();
             this.roomTblTableAdapter = new HotelReservationApp.DatabaseSSPDataSetTableAdapters.roomTblTableAdapter();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnCheck = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radBtnSingle = new System.Windows.Forms.RadioButton();
+            this.radBtnMultiple = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSSP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomTblBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.databaseSSPDataSet)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dateTimePicker1
+            // dateTimeFrom
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(568, 323);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 0;
+            this.dateTimeFrom.Location = new System.Drawing.Point(11, 93);
+            this.dateTimeFrom.Name = "dateTimeFrom";
+            this.dateTimeFrom.Size = new System.Drawing.Size(200, 20);
+            this.dateTimeFrom.TabIndex = 0;
             // 
-            // dateTimePicker2
+            // dateTimeTo
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(568, 349);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 1;
+            this.dateTimeTo.Enabled = false;
+            this.dateTimeTo.Location = new System.Drawing.Point(11, 132);
+            this.dateTimeTo.Name = "dateTimeTo";
+            this.dateTimeTo.Size = new System.Drawing.Size(200, 20);
+            this.dateTimeTo.TabIndex = 1;
             // 
             // menuStrip1
             // 
@@ -103,7 +109,7 @@
             // signOutToolStripMenuItem
             // 
             this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.signOutToolStripMenuItem.Text = "Sign Out";
             // 
             // optionToolStripMenuItem
@@ -117,7 +123,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -158,7 +164,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(565, 303);
+            this.label3.Location = new System.Drawing.Point(8, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 7;
@@ -167,7 +173,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(532, 329);
+            this.label4.Location = new System.Drawing.Point(8, 77);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(30, 13);
             this.label4.TabIndex = 8;
@@ -176,7 +182,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(532, 355);
+            this.label5.Location = new System.Drawing.Point(8, 116);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(20, 13);
             this.label5.TabIndex = 9;
@@ -184,7 +190,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(557, 393);
+            this.button1.Location = new System.Drawing.Point(131, 176);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
@@ -358,20 +364,67 @@
             this.label8.TabIndex = 13;
             this.label8.Text = "Rooms";
             // 
+            // btnCheck
+            // 
+            this.btnCheck.Location = new System.Drawing.Point(6, 176);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(75, 23);
+            this.btnCheck.TabIndex = 14;
+            this.btnCheck.Text = "Check";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radBtnMultiple);
+            this.groupBox2.Controls.Add(this.radBtnSingle);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.btnCheck);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.dateTimeFrom);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.dateTimeTo);
+            this.groupBox2.Location = new System.Drawing.Point(535, 254);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(233, 205);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Booking";
+            // 
+            // radBtnSingle
+            // 
+            this.radBtnSingle.AutoSize = true;
+            this.radBtnSingle.Checked = true;
+            this.radBtnSingle.Location = new System.Drawing.Point(12, 34);
+            this.radBtnSingle.Name = "radBtnSingle";
+            this.radBtnSingle.Size = new System.Drawing.Size(76, 17);
+            this.radBtnSingle.TabIndex = 15;
+            this.radBtnSingle.TabStop = true;
+            this.radBtnSingle.Text = "Single Day";
+            this.radBtnSingle.UseVisualStyleBackColor = true;
+            this.radBtnSingle.CheckedChanged += new System.EventHandler(this.radBtnSingle_CheckedChanged);
+            // 
+            // radBtnMultiple
+            // 
+            this.radBtnMultiple.AutoSize = true;
+            this.radBtnMultiple.Location = new System.Drawing.Point(94, 34);
+            this.radBtnMultiple.Name = "radBtnMultiple";
+            this.radBtnMultiple.Size = new System.Drawing.Size(88, 17);
+            this.radBtnMultiple.TabIndex = 16;
+            this.radBtnMultiple.Text = "Multiple Days";
+            this.radBtnMultiple.UseVisualStyleBackColor = true;
+            this.radBtnMultiple.CheckedChanged += new System.EventHandler(this.radBtnMultiple_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 471);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dataGridViewSSP);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -384,6 +437,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSSP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomTblBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.databaseSSPDataSet)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,8 +446,8 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimeFrom;
+        private System.Windows.Forms.DateTimePicker dateTimeTo;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem signOutToolStripMenuItem;
@@ -421,6 +476,10 @@
         private System.Windows.Forms.ComboBox cmboBxNumBeds;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnCheck;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radBtnMultiple;
+        private System.Windows.Forms.RadioButton radBtnSingle;
     }
 }
 

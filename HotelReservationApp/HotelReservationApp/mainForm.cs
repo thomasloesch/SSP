@@ -88,5 +88,21 @@ namespace HotelReservationApp
         {
             Application.Exit();
         }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radBtnSingle_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimeTo.Enabled = false;
+            dateTimeTo.ResetText();
+        }
+
+        private void radBtnMultiple_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimeTo.Enabled = true;
+        }
     }
 }
