@@ -43,7 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnBook = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.cmboBxBedType = new System.Windows.Forms.ComboBox();
@@ -188,14 +188,14 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "To";
             // 
-            // button1
+            // btnBook
             // 
-            this.button1.Location = new System.Drawing.Point(131, 176);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Submit";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnBook.Location = new System.Drawing.Point(131, 176);
+            this.btnBook.Name = "btnBook";
+            this.btnBook.Size = new System.Drawing.Size(75, 23);
+            this.btnBook.TabIndex = 10;
+            this.btnBook.Text = "Book";
+            this.btnBook.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -294,7 +294,7 @@
             this.dataGridViewSSP.ReadOnly = true;
             this.dataGridViewSSP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewSSP.Size = new System.Drawing.Size(495, 396);
-            this.dataGridViewSSP.TabIndex = 12;
+            this.dataGridViewSSP.TabIndex = 1;
             // 
             // roomNumDataGridViewTextBoxColumn
             // 
@@ -382,7 +382,7 @@
             this.groupBox2.Controls.Add(this.btnCheck);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.dateTimeFrom);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.btnBook);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.dateTimeTo);
             this.groupBox2.Location = new System.Drawing.Point(535, 254);
@@ -459,7 +459,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnBook;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
