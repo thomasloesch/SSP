@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -49,7 +50,7 @@
             this.cmboBxNumBeds = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewSSP = new System.Windows.Forms.DataGridView();
             this.roomNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.roomTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bedsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,9 +59,10 @@
             this.roomTblBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.databaseSSPDataSet = new HotelReservationApp.DatabaseSSPDataSet();
             this.roomTblTableAdapter = new HotelReservationApp.DatabaseSSPDataSetTableAdapters.roomTblTableAdapter();
+            this.label8 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSSP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomTblBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.databaseSSPDataSet)).BeginInit();
             this.SuspendLayout();
@@ -101,7 +103,7 @@
             // signOutToolStripMenuItem
             // 
             this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.signOutToolStripMenuItem.Text = "Sign Out";
             // 
             // optionToolStripMenuItem
@@ -265,24 +267,28 @@
             this.label6.TabIndex = 7;
             this.label6.Text = "Type of Beds";
             // 
-            // dataGridView1
+            // dataGridViewSSP
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewSSP.AllowUserToAddRows = false;
+            this.dataGridViewSSP.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewSSP.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewSSP.AutoGenerateColumns = false;
+            this.dataGridViewSSP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSSP.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.roomNumDataGridViewTextBoxColumn,
             this.roomTypeDataGridViewTextBoxColumn,
             this.bedsDataGridViewTextBoxColumn,
             this.bedTypeDataGridViewTextBoxColumn,
             this.priceDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.roomTblBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 39);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(479, 420);
-            this.dataGridView1.TabIndex = 12;
+            this.dataGridViewSSP.DataSource = this.roomTblBindingSource;
+            this.dataGridViewSSP.Location = new System.Drawing.Point(12, 63);
+            this.dataGridViewSSP.MultiSelect = false;
+            this.dataGridViewSSP.Name = "dataGridViewSSP";
+            this.dataGridViewSSP.ReadOnly = true;
+            this.dataGridViewSSP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewSSP.Size = new System.Drawing.Size(495, 396);
+            this.dataGridViewSSP.TabIndex = 12;
             // 
             // roomNumDataGridViewTextBoxColumn
             // 
@@ -343,12 +349,22 @@
             // 
             this.roomTblTableAdapter.ClearBeforeFill = true;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 39);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Rooms";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 471);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.dataGridViewSSP);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
@@ -365,7 +381,7 @@
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSSP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomTblBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.databaseSSPDataSet)).EndInit();
             this.ResumeLayout(false);
@@ -392,7 +408,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewSSP;
         private DatabaseSSPDataSet databaseSSPDataSet;
         private System.Windows.Forms.BindingSource roomTblBindingSource;
         private DatabaseSSPDataSetTableAdapters.roomTblTableAdapter roomTblTableAdapter;
@@ -404,6 +420,7 @@
         private System.Windows.Forms.ComboBox cmboBxBedType;
         private System.Windows.Forms.ComboBox cmboBxNumBeds;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Label label8;
     }
 }
 
