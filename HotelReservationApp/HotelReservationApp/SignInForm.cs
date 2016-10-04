@@ -29,7 +29,7 @@ namespace HotelReservationApp
             }
 
             // Establish connection with the database
-            string dbConnection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Workspace\SSP\HotelReservationApp\HotelReservationApp\DatabaseSSP.mdf;Integrated Security=True";
+            string dbConnection = @"Data Source=tloesch.database.windows.net;Initial Catalog=dbSSP;Integrated Security=False;User ID=tloesch;Password=Ssp12345;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             SqlConnection conn = new SqlConnection(dbConnection);
             conn.Open();
 

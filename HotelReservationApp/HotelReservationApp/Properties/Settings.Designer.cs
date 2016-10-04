@@ -26,11 +26,23 @@ namespace HotelReservationApp.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\DatabaseSSP.m" +
-            "df;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=dbSSP;Integrated Security=True" +
+            ";Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=" +
+            "ReadWrite;MultiSubnetFailover=False")]
         public string DatabaseSSPConnectionString {
             get {
                 return ((string)(this["DatabaseSSPConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=tloesch.database.windows.net;Initial Catalog=dbSSP;Persist Security I" +
+            "nfo=True;User ID=tloesch;Password=Ssp12345")]
+        public string dbSSPConnectionString {
+            get {
+                return ((string)(this["dbSSPConnectionString"]));
             }
         }
     }

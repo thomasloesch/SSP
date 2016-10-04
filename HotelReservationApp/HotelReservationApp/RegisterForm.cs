@@ -25,17 +25,17 @@ namespace HotelReservationApp
             // Check to see if user entered data
             if (txtBxName.Text.Length < 4)
             {
-                lblMessage.Text = "Please use a longer username.";
+                MessageBox.Show("Please use a longer username.");
                 return;
             }
             if(txtBxPass.Text.Length < 8)
             {
-                lblMessage.Text = "Please use a longer password.";
+                MessageBox.Show("Please use a longer password.");
                 return;
             }
 
             // Establish connection to the database
-            string dbConnection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Workspace\SSP\HotelReservationApp\HotelReservationApp\DatabaseSSP.mdf;Integrated Security=True";
+            string dbConnection = @"Data Source=tloesch.database.windows.net;Initial Catalog=dbSSP;Integrated Security=False;User ID=tloesch;Password=Ssp12345;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             SqlConnection conn = new SqlConnection(dbConnection);
             conn.Open();
 
@@ -79,7 +79,8 @@ namespace HotelReservationApp
                 catch (Exception ex)
                 {
                     // Ensure dataReader is closed
-                    dbReader.Close();
+                    if(!dbReader.IsClosed)
+                        dbReader.Close();
 
                     // Make sure UserName is removed from db if there
                     // is an exception when attempting to set password

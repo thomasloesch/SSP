@@ -16,14 +16,14 @@ namespace HotelReservationApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //SignInForm fLogin = new SignInForm();
-            //if (fLogin.ShowDialog() == DialogResult.OK)
+            //SignInForm frmLogin = new SignInForm();
+            //if (frmLogin.ShowDialog() == DialogResult.OK)
             //{
                 Application.Run(new MainForm());
             //}
             //else
             //{
-                //Application.Exit();
+            //    Application.Exit();
             //}
         }
     }

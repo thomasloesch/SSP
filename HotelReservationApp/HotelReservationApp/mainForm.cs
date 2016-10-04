@@ -25,8 +25,10 @@ namespace HotelReservationApp
 
         private void main_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'databaseSSPDataSet.roomTbl' table. You can move, or remove it, as needed.
-            this.roomTblTableAdapter.Fill(this.databaseSSPDataSet.roomTbl);
+            // TODO: This line of code loads data into the 'dbSSPDataSet.bookedTbl' table. You can move, or remove it, as needed.
+            this.bookedTblTableAdapter.Fill(this.dbSSPDataSet.bookedTbl);
+            // TODO: This line of code loads data into the 'dbSSPDataSet.roomTbl' table. You can move, or remove it, as needed.
+            this.roomTblTableAdapter.Fill(this.dbSSPDataSet.roomTbl);
 
             // Set combo boxes to "None"
             cmboBxBedType.SelectedIndex = 0;
@@ -44,7 +46,7 @@ namespace HotelReservationApp
             // Set new query for database
             string sqlQuery = "SELECT RoomNum, RoomType, Beds, BedType, Price FROM roomTbl";
 
-            // Get current status of combo boxes
+            // Get current status of combo boxes and set query accordingly
             if (cmboBxBedType.Text != "None" || cmboBxNumBeds.Text != "None" || cmboBxRmType.Text != "None")
             {
                 sqlQuery += " WHERE";
@@ -66,7 +68,7 @@ namespace HotelReservationApp
                 }
                 else if (cmboBxNumBeds.Text != "None")
                 {
-                    sqlQuery += " .Beds='" + cmboBxNumBeds.Text + "'";
+                    sqlQuery += " Beds='" + cmboBxNumBeds.Text + "'";
                     if (cmboBxRmType.Text != "None")
                     {
                         sqlQuery += " AND RoomType='" + cmboBxRmType.Text + "'";
@@ -81,7 +83,16 @@ namespace HotelReservationApp
 
             // Update the dataAdapter
             roomTblTableAdapter.Adapter.SelectCommand.CommandText = sqlQuery;
-            this.roomTblTableAdapter.Fill(this.databaseSSPDataSet.roomTbl);
+            this.roomTblTableAdapter.Fill(this.dbSSPDataSet.roomTbl);
+            if (this.dbSSPDataSet.roomTbl.Count == 0)
+            {
+                lblRooms.Text = "There are no rooms that match your preferences.";
+                lblRooms.Visible = true;
+            }
+            else
+            {
+                lblRooms.Visible = false;
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -91,14 +102,56 @@ namespace HotelReservationApp
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void radBtnSingle_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimeTo.Enabled = false;
+            dateTimeTo.ResetText();
+        }
+
+        private void radBtnMultiple_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimeTo.Enabled = true;
+        }
+
+        private void dataGridViewSSP_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Get room number of selected row
+            DataGridViewRow currRow = dataGridViewSSP.Rows[e.RowIndex];
+            string selectedRoomId = currRow.Cells[0].Value.ToString();
+
+            // Set new query for database
+            string sqlQuery = "SELECT * FROM bookedTbl WHERE RoomId='" + selectedRoomId + "';";
+
+            // Update the dataAdapter
+            bookedTblTableAdapter.Adapter.SelectCommand.CommandText = sqlQuery;
+            this.bookedTblTableAdapter.Fill(this.dbSSPDataSet.bookedTbl);
+
+            // Display message if no bookings
+            if (this.dbSSPDataSet.bookedTbl.Count == 0)
+            {
+                lblBooked.Text = "This room currently has no bookings.";
+                lblBooked.Visible = true;
+            }
+            else
+            {
+                lblBooked.Visible = false;
+            }
+        }
+
+        private void btnBook_Click(object sender, EventArgs e)
+        {
             // Check for invalid states
-            if (dateTimeFrom.Value.Date < DateTime.Now.Date) {
+            if (dateTimeFrom.Value.Date < DateTime.Now.Date)
+            {
                 MessageBox.Show("You can't book a date that has already happened!\nPlease change your selection.");
                 return;
             }
             if (dataGridViewSSP.SelectedRows.Count != 1)
             {
-                MessageBox.Show("Please select one row.");
+                MessageBox.Show("Please select a single row.");
                 return;
             }
 
@@ -106,25 +159,28 @@ namespace HotelReservationApp
             string selectedRowRoomNum = dataGridViewSSP.SelectedRows[0].Cells[0].Value.ToString();
 
             // Establish connection to the database
-            SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=C:\WORKSPACE\SSP\HOTELRESERVATIONAPP\HOTELRESERVATIONAPP\BIN\DEBUG\DATABASESSP.MDF;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            string connectionString = @"Data Source=tloesch.database.windows.net;Initial Catalog=dbSSP;Integrated Security=False;User ID=tloesch;Password=Ssp12345;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
 
-            string query = "SELECT Id FROM dbo.roomTbl WHERE RoomNum='" + selectedRowRoomNum + "';";
+            string query = "SELECT * FROM dbo.bookedTbl WHERE RoomId='" + selectedRowRoomNum + "';";
             SqlCommand sqlCmd = new SqlCommand(query, conn);
             SqlDataReader sqlReader = sqlCmd.ExecuteReader();
-            sqlReader.Read();
-            string selectedRoomId = sqlReader.GetString(0);
-            sqlReader.Close();
-
-            query = "SELECT * FROM dbo.bookedTbl WHERE RoomId='" + selectedRoomId + "';";
-            sqlCmd.CommandText = query;
-            sqlReader = sqlCmd.ExecuteReader();
             while (sqlReader.Read())
             {
-                // Check if dates intersect
+                // Check if any booking intersect with selected dates
                 DateTime to, from;
                 to = sqlReader.GetDateTime(4);
                 from = sqlReader.GetDateTime(5);
+
+                DateTime selectedTo, selectedFrom;
+                selectedTo = dateTimeTo.Value;
+                selectedFrom = dateTimeFrom.Value;
+                bool case1, case2, case3;
+
+                case1 = selectedFrom <  && (selectedFrom > to && selectedFrom < from);
+                case2 = false;
+                case3 = false;
 
                 // TODO: Check logic, probably incorrect (Might be able to move this check into the sql statement)
                 if ((from > dateTimeFrom.Value && to < dateTimeTo.Value) || (to < dateTimeTo.Value && from > dateTimeFrom.Value))
@@ -140,17 +196,6 @@ namespace HotelReservationApp
 
             sqlReader.Close();
             conn.Close();
-        }
-
-        private void radBtnSingle_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTimeTo.Enabled = false;
-            dateTimeTo.ResetText();
-        }
-
-        private void radBtnMultiple_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTimeTo.Enabled = true;
         }
     }
 }
