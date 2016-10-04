@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dateTimeFrom = new System.Windows.Forms.DateTimePicker();
             this.dateTimeTo = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -89,6 +89,8 @@
             this.dateTimeFrom.Name = "dateTimeFrom";
             this.dateTimeFrom.Size = new System.Drawing.Size(200, 20);
             this.dateTimeFrom.TabIndex = 0;
+            this.dateTimeFrom.Value = new System.DateTime(2016, 10, 4, 0, 0, 0, 0);
+            this.dateTimeFrom.ValueChanged += new System.EventHandler(this.dateTimeFrom_ValueChanged);
             // 
             // dateTimeTo
             // 
@@ -97,6 +99,7 @@
             this.dateTimeTo.Name = "dateTimeTo";
             this.dateTimeTo.Size = new System.Drawing.Size(200, 20);
             this.dateTimeTo.TabIndex = 1;
+            this.dateTimeTo.Value = new System.DateTime(2016, 10, 4, 0, 0, 0, 0);
             // 
             // menuStrip1
             // 
@@ -332,8 +335,8 @@
             this.dataGridViewSSP.AllowUserToDeleteRows = false;
             this.dataGridViewSSP.AllowUserToResizeColumns = false;
             this.dataGridViewSSP.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewSSP.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewSSP.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewSSP.AutoGenerateColumns = false;
             this.dataGridViewSSP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewSSP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -418,9 +421,10 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.roomIdDataGridViewTextBoxColumn,
@@ -428,6 +432,7 @@
             this.ToDate});
             this.dataGridView1.DataSource = this.bookedTblBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(477, 176);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
@@ -470,7 +475,7 @@
             this.roomIdDataGridViewTextBoxColumn.HeaderText = "Room #";
             this.roomIdDataGridViewTextBoxColumn.Name = "roomIdDataGridViewTextBoxColumn";
             this.roomIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.roomIdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.roomIdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.roomIdDataGridViewTextBoxColumn.Width = 70;
             // 
             // FromDate
@@ -480,6 +485,7 @@
             this.FromDate.HeaderText = "From";
             this.FromDate.Name = "FromDate";
             this.FromDate.ReadOnly = true;
+            this.FromDate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.FromDate.Width = 55;
             // 
             // ToDate
@@ -489,6 +495,7 @@
             this.ToDate.HeaderText = "To";
             this.ToDate.Name = "ToDate";
             this.ToDate.ReadOnly = true;
+            this.ToDate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ToDate.Width = 45;
             // 
             // MainForm

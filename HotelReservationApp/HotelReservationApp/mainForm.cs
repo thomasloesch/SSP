@@ -114,6 +114,7 @@ namespace HotelReservationApp
         private void radBtnMultiple_CheckedChanged(object sender, EventArgs e)
         {
             dateTimeTo.Enabled = true;
+            dateTimeTo.Value = dateTimeFrom.Value;
         }
 
         private void dataGridViewSSP_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -181,8 +182,10 @@ namespace HotelReservationApp
             {
                 // Check if any booking intersect with selected dates
                 DateTime to, from;
-                to = sqlReader.GetDateTime(4);
-                from = sqlReader.GetDateTime(5);
+                int toIndex = sqlReader.GetOrdinal("ToDate");
+                int fromIndex = sqlReader.GetOrdinal("FromDate");
+                to = sqlReader.GetDateTime(toIndex);
+                from = sqlReader.GetDateTime(fromIndex);
 
                 
 
@@ -205,7 +208,7 @@ namespace HotelReservationApp
             }
             sqlReader.Close();
 
-            query = "INSERT INTO dbo.bookedTbl(RoomId, ToDate, FromDate) VALUES(@rId, @fromDate, @toDate);";
+            query = "INSERT INTO dbo.bookedTbl(RoomId, FromDate, ToDate) VALUES(@rId, @fromDate, @toDate);";
             sqlCmd.CommandText = query;
             sqlCmd.Parameters.AddWithValue("@rId", selectedRowRoomNum);
             sqlCmd.Parameters.AddWithValue("@fromDate", selectedFrom);
@@ -215,6 +218,12 @@ namespace HotelReservationApp
             MessageBox.Show("Your room has been booked.\nThank you for staying with us!");
 
             conn.Close();
+        }
+
+        private void dateTimeFrom_ValueChanged(object sender, EventArgs e)
+        {
+            if (radBtnSingle.Checked)
+                dateTimeTo.Value = dateTimeFrom.Value;
         }
     }
 }
