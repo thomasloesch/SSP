@@ -77,6 +77,8 @@ namespace HotelReservationApp
                         sqlQuery = "INSERT INTO dbo.passTbl(Usr_Id, Hash, Salt) VALUES(" + user_Id + ", '" + Convert.ToBase64String(hash) + "', '" + Convert.ToBase64String(salt) + "');";
                         sqlCmd = new SqlCommand(sqlQuery, conn);
                         sqlCmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Your username has been added.\nPlease proceed to log-in.");
                     }
                     catch (Exception ex)
                     {
@@ -105,6 +107,11 @@ namespace HotelReservationApp
             {
                 MessageBox.Show("There was an error attempting to connect to the database.\n" + ex.Message);
             }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

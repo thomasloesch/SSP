@@ -34,11 +34,12 @@
             this.lblMessage = new System.Windows.Forms.Label();
             this.txtBxName = new System.Windows.Forms.TextBox();
             this.txtBxPass = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(86, 149);
+            this.btnConfirm.Location = new System.Drawing.Point(86, 132);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 0;
@@ -89,12 +90,23 @@
             this.txtBxPass.Size = new System.Drawing.Size(163, 20);
             this.txtBxPass.TabIndex = 5;
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(86, 159);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 6;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // RegisterForm
             // 
             this.AcceptButton = this.btnConfirm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(246, 194);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtBxPass);
             this.Controls.Add(this.txtBxName);
             this.Controls.Add(this.lblMessage);
@@ -117,5 +129,6 @@
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.TextBox txtBxName;
         private System.Windows.Forms.TextBox txtBxPass;
+        private System.Windows.Forms.Button btnClose;
     }
 }
