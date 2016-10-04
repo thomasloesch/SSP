@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dateTimeFrom = new System.Windows.Forms.DateTimePicker();
             this.dateTimeTo = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -51,11 +51,15 @@
             this.cmboBxNumBeds = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnCheck = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radBtnMultiple = new System.Windows.Forms.RadioButton();
             this.radBtnSingle = new System.Windows.Forms.RadioButton();
             this.dataGridViewSSP = new System.Windows.Forms.DataGridView();
+            this.roomNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roomTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bedsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bedTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.roomTblBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dbSSPDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dbSSPDataSet = new HotelReservationApp.dbSSPDataSet();
@@ -63,16 +67,11 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.bookedTblBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookedTblTableAdapter = new HotelReservationApp.dbSSPDataSetTableAdapters.bookedTblTableAdapter();
-            this.roomNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.roomTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bedsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bedTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblRooms = new System.Windows.Forms.Label();
             this.lblBooked = new System.Windows.Forms.Label();
             this.roomIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FromDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ToDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -286,22 +285,11 @@
             this.label6.TabIndex = 7;
             this.label6.Text = "Type of Beds";
             // 
-            // btnCheck
-            // 
-            this.btnCheck.Location = new System.Drawing.Point(212, 12);
-            this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(75, 23);
-            this.btnCheck.TabIndex = 14;
-            this.btnCheck.Text = "Check";
-            this.btnCheck.UseVisualStyleBackColor = true;
-            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.radBtnMultiple);
             this.groupBox2.Controls.Add(this.radBtnSingle);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.btnCheck);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.dateTimeFrom);
             this.groupBox2.Controls.Add(this.btnBook);
@@ -344,8 +332,8 @@
             this.dataGridViewSSP.AllowUserToDeleteRows = false;
             this.dataGridViewSSP.AllowUserToResizeColumns = false;
             this.dataGridViewSSP.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewSSP.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewSSP.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewSSP.AutoGenerateColumns = false;
             this.dataGridViewSSP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewSSP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -364,56 +352,6 @@
             this.dataGridViewSSP.Size = new System.Drawing.Size(459, 263);
             this.dataGridViewSSP.TabIndex = 16;
             this.dataGridViewSSP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSSP_CellContentClick);
-            // 
-            // roomTblBindingSource
-            // 
-            this.roomTblBindingSource.DataMember = "roomTbl";
-            this.roomTblBindingSource.DataSource = this.dbSSPDataSetBindingSource;
-            // 
-            // dbSSPDataSetBindingSource
-            // 
-            this.dbSSPDataSetBindingSource.DataSource = this.dbSSPDataSet;
-            this.dbSSPDataSetBindingSource.Position = 0;
-            // 
-            // dbSSPDataSet
-            // 
-            this.dbSSPDataSet.DataSetName = "dbSSPDataSet";
-            this.dbSSPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // roomTblTableAdapter
-            // 
-            this.roomTblTableAdapter.ClearBeforeFill = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.roomIdDataGridViewTextBoxColumn,
-            this.fromDataGridViewTextBoxColumn,
-            this.toDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.bookedTblBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(477, 176);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(315, 263);
-            this.dataGridView1.TabIndex = 17;
-            // 
-            // bookedTblBindingSource
-            // 
-            this.bookedTblBindingSource.DataMember = "bookedTbl";
-            this.bookedTblBindingSource.DataSource = this.dbSSPDataSetBindingSource;
-            // 
-            // bookedTblTableAdapter
-            // 
-            this.bookedTblTableAdapter.ClearBeforeFill = true;
             // 
             // roomNumDataGridViewTextBoxColumn
             // 
@@ -455,6 +393,56 @@
             this.priceDataGridViewTextBoxColumn.ReadOnly = true;
             this.priceDataGridViewTextBoxColumn.Width = 56;
             // 
+            // roomTblBindingSource
+            // 
+            this.roomTblBindingSource.DataMember = "roomTbl";
+            this.roomTblBindingSource.DataSource = this.dbSSPDataSetBindingSource;
+            // 
+            // dbSSPDataSetBindingSource
+            // 
+            this.dbSSPDataSetBindingSource.DataSource = this.dbSSPDataSet;
+            this.dbSSPDataSetBindingSource.Position = 0;
+            // 
+            // dbSSPDataSet
+            // 
+            this.dbSSPDataSet.DataSetName = "dbSSPDataSet";
+            this.dbSSPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // roomTblTableAdapter
+            // 
+            this.roomTblTableAdapter.ClearBeforeFill = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.roomIdDataGridViewTextBoxColumn,
+            this.FromDate,
+            this.ToDate});
+            this.dataGridView1.DataSource = this.bookedTblBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(477, 176);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(315, 263);
+            this.dataGridView1.TabIndex = 17;
+            // 
+            // bookedTblBindingSource
+            // 
+            this.bookedTblBindingSource.DataMember = "bookedTbl";
+            this.bookedTblBindingSource.DataSource = this.dbSSPDataSetBindingSource;
+            // 
+            // bookedTblTableAdapter
+            // 
+            this.bookedTblTableAdapter.ClearBeforeFill = true;
+            // 
             // lblRooms
             // 
             this.lblRooms.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -477,24 +465,31 @@
             // 
             // roomIdDataGridViewTextBoxColumn
             // 
+            this.roomIdDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.roomIdDataGridViewTextBoxColumn.DataPropertyName = "RoomId";
             this.roomIdDataGridViewTextBoxColumn.HeaderText = "Room #";
             this.roomIdDataGridViewTextBoxColumn.Name = "roomIdDataGridViewTextBoxColumn";
             this.roomIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.roomIdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.roomIdDataGridViewTextBoxColumn.Width = 70;
             // 
-            // fromDataGridViewTextBoxColumn
+            // FromDate
             // 
-            this.fromDataGridViewTextBoxColumn.DataPropertyName = "From";
-            this.fromDataGridViewTextBoxColumn.HeaderText = "From";
-            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
-            this.fromDataGridViewTextBoxColumn.ReadOnly = true;
+            this.FromDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FromDate.DataPropertyName = "FromDate";
+            this.FromDate.HeaderText = "From";
+            this.FromDate.Name = "FromDate";
+            this.FromDate.ReadOnly = true;
+            this.FromDate.Width = 55;
             // 
-            // toDataGridViewTextBoxColumn
+            // ToDate
             // 
-            this.toDataGridViewTextBoxColumn.DataPropertyName = "To";
-            this.toDataGridViewTextBoxColumn.HeaderText = "To";
-            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
-            this.toDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ToDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ToDate.DataPropertyName = "ToDate";
+            this.ToDate.HeaderText = "To";
+            this.ToDate.Name = "ToDate";
+            this.ToDate.ReadOnly = true;
+            this.ToDate.Width = 45;
             // 
             // MainForm
             // 
@@ -552,7 +547,6 @@
         private System.Windows.Forms.ComboBox cmboBxBedType;
         private System.Windows.Forms.ComboBox cmboBxNumBeds;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton radBtnMultiple;
         private System.Windows.Forms.RadioButton radBtnSingle;
@@ -571,9 +565,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label lblRooms;
         private System.Windows.Forms.Label lblBooked;
-        private System.Windows.Forms.DataGridViewTextBoxColumn roomIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fromDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn toDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn roomIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FromDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ToDate;
     }
 }
 

@@ -318,11 +318,9 @@ namespace HotelReservationApp {
             
             private global::System.Data.DataColumn columnRoomId;
             
-            private global::System.Data.DataColumn columnUserId;
+            private global::System.Data.DataColumn columnToDate;
             
-            private global::System.Data.DataColumn columnTo;
-            
-            private global::System.Data.DataColumn columnFrom;
+            private global::System.Data.DataColumn columnFromDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -375,25 +373,17 @@ namespace HotelReservationApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn UserIdColumn {
+            public global::System.Data.DataColumn ToDateColumn {
                 get {
-                    return this.columnUserId;
+                    return this.columnToDate;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ToColumn {
+            public global::System.Data.DataColumn FromDateColumn {
                 get {
-                    return this.columnTo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FromColumn {
-                get {
-                    return this.columnFrom;
+                    return this.columnFromDate;
                 }
             }
             
@@ -434,14 +424,13 @@ namespace HotelReservationApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bookedTblRow AddbookedTblRow(int RoomId, int UserId, System.DateTime To, System.DateTime From) {
+            public bookedTblRow AddbookedTblRow(int RoomId, System.DateTime ToDate, System.DateTime FromDate) {
                 bookedTblRow rowbookedTblRow = ((bookedTblRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         RoomId,
-                        UserId,
-                        To,
-                        From};
+                        ToDate,
+                        FromDate};
                 rowbookedTblRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowbookedTblRow);
                 return rowbookedTblRow;
@@ -473,9 +462,8 @@ namespace HotelReservationApp {
             internal void InitVars() {
                 this.columnId = base.Columns["Id"];
                 this.columnRoomId = base.Columns["RoomId"];
-                this.columnUserId = base.Columns["UserId"];
-                this.columnTo = base.Columns["To"];
-                this.columnFrom = base.Columns["From"];
+                this.columnToDate = base.Columns["ToDate"];
+                this.columnFromDate = base.Columns["FromDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -485,12 +473,10 @@ namespace HotelReservationApp {
                 base.Columns.Add(this.columnId);
                 this.columnRoomId = new global::System.Data.DataColumn("RoomId", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRoomId);
-                this.columnUserId = new global::System.Data.DataColumn("UserId", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUserId);
-                this.columnTo = new global::System.Data.DataColumn("To", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTo);
-                this.columnFrom = new global::System.Data.DataColumn("From", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFrom);
+                this.columnToDate = new global::System.Data.DataColumn("ToDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnToDate);
+                this.columnFromDate = new global::System.Data.DataColumn("FromDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFromDate);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -500,9 +486,8 @@ namespace HotelReservationApp {
                 this.columnId.ReadOnly = true;
                 this.columnId.Unique = true;
                 this.columnRoomId.AllowDBNull = false;
-                this.columnUserId.AllowDBNull = false;
-                this.columnTo.AllowDBNull = false;
-                this.columnFrom.AllowDBNull = false;
+                this.columnToDate.AllowDBNull = false;
+                this.columnFromDate.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1006,34 +991,23 @@ namespace HotelReservationApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int UserId {
+            public System.DateTime ToDate {
                 get {
-                    return ((int)(this[this.tablebookedTbl.UserIdColumn]));
+                    return ((global::System.DateTime)(this[this.tablebookedTbl.ToDateColumn]));
                 }
                 set {
-                    this[this.tablebookedTbl.UserIdColumn] = value;
+                    this[this.tablebookedTbl.ToDateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime To {
+            public System.DateTime FromDate {
                 get {
-                    return ((global::System.DateTime)(this[this.tablebookedTbl.ToColumn]));
+                    return ((global::System.DateTime)(this[this.tablebookedTbl.FromDateColumn]));
                 }
                 set {
-                    this[this.tablebookedTbl.ToColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime From {
-                get {
-                    return ((global::System.DateTime)(this[this.tablebookedTbl.FromColumn]));
-                }
-                set {
-                    this[this.tablebookedTbl.FromColumn] = value;
+                    this[this.tablebookedTbl.FromDateColumn] = value;
                 }
             }
         }
@@ -1314,45 +1288,39 @@ namespace HotelReservationApp.dbSSPDataSetTableAdapters {
             tableMapping.DataSetTable = "bookedTbl";
             tableMapping.ColumnMappings.Add("Id", "Id");
             tableMapping.ColumnMappings.Add("RoomId", "RoomId");
-            tableMapping.ColumnMappings.Add("UserId", "UserId");
-            tableMapping.ColumnMappings.Add("To", "To");
-            tableMapping.ColumnMappings.Add("From", "From");
+            tableMapping.ColumnMappings.Add("ToDate", "ToDate");
+            tableMapping.ColumnMappings.Add("FromDate", "FromDate");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[bookedTbl] WHERE (([Id] = @Original_Id) AND ([RoomId] = @Origi" +
-                "nal_RoomId) AND ([UserId] = @Original_UserId) AND ([To] = @Original_To) AND ([Fr" +
-                "om] = @Original_From))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [bookedTbl] WHERE (([Id] = @Original_Id) AND ([RoomId] = @Original_Ro" +
+                "omId) AND ([FromDate] = @Original_FromDate) AND ([ToDate] = @Original_ToDate))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RoomId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RoomId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_To", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "To", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_From", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "From", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FromDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FromDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ToDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ToDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[bookedTbl] ([RoomId], [UserId], [To], [From]) VALUES (@RoomId," +
-                " @UserId, @To, @From);\r\nSELECT Id, RoomId, UserId, [To], [From] FROM bookedTbl W" +
-                "HERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [bookedTbl] ([RoomId], [FromDate], [ToDate]) VALUES (@RoomId, @FromDa" +
+                "te, @ToDate);\r\nSELECT Id, RoomId, FromDate, ToDate FROM bookedTbl WHERE (Id = SC" +
+                "OPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RoomId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RoomId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@To", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "To", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@From", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FromDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FromDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ToDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ToDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[bookedTbl] SET [RoomId] = @RoomId, [UserId] = @UserId, [To] = @To, [From] = @From WHERE (([Id] = @Original_Id) AND ([RoomId] = @Original_RoomId) AND ([UserId] = @Original_UserId) AND ([To] = @Original_To) AND ([From] = @Original_From));
-SELECT Id, RoomId, UserId, [To], [From] FROM bookedTbl WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [bookedTbl] SET [RoomId] = @RoomId, [FromDate] = @FromDate, [ToDate] = @ToDate WHERE (([Id] = @Original_Id) AND ([RoomId] = @Original_RoomId) AND ([FromDate] = @Original_FromDate) AND ([ToDate] = @Original_ToDate));
+SELECT Id, RoomId, FromDate, ToDate FROM bookedTbl WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RoomId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RoomId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@To", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "To", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@From", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "From", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FromDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FromDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ToDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ToDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RoomId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RoomId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UserId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UserId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_To", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "To", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_From", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "From", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FromDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FromDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ToDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ToDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -1369,7 +1337,7 @@ SELECT Id, RoomId, UserId, [To], [From] FROM bookedTbl WHERE (Id = @Id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, RoomId, UserId, [To], [From] FROM dbo.bookedTbl";
+            this._commandCollection[0].CommandText = "SELECT Id, RoomId, FromDate, ToDate FROM bookedTbl";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1430,12 +1398,11 @@ SELECT Id, RoomId, UserId, [To], [From] FROM bookedTbl WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, int Original_RoomId, int Original_UserId, System.DateTime Original_To, System.DateTime Original_From) {
+        public virtual int Delete(int Original_Id, int Original_RoomId, System.DateTime Original_FromDate, System.DateTime Original_ToDate) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_RoomId));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_UserId));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_To));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_From));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_FromDate));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_ToDate));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1456,11 +1423,10 @@ SELECT Id, RoomId, UserId, [To], [From] FROM bookedTbl WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int RoomId, int UserId, System.DateTime To, System.DateTime From) {
+        public virtual int Insert(int RoomId, System.DateTime FromDate, System.DateTime ToDate) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(RoomId));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(UserId));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(To));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(From));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(FromDate));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(ToDate));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1481,17 +1447,15 @@ SELECT Id, RoomId, UserId, [To], [From] FROM bookedTbl WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int RoomId, int UserId, System.DateTime To, System.DateTime From, int Original_Id, int Original_RoomId, int Original_UserId, System.DateTime Original_To, System.DateTime Original_From, int Id) {
+        public virtual int Update(int RoomId, System.DateTime FromDate, System.DateTime ToDate, int Original_Id, int Original_RoomId, System.DateTime Original_FromDate, System.DateTime Original_ToDate, int Id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(RoomId));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(UserId));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(To));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(From));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_RoomId));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_UserId));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Original_To));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_From));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(FromDate));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(ToDate));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_RoomId));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(Original_FromDate));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(Original_ToDate));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1512,8 +1476,8 @@ SELECT Id, RoomId, UserId, [To], [From] FROM bookedTbl WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int RoomId, int UserId, System.DateTime To, System.DateTime From, int Original_Id, int Original_RoomId, int Original_UserId, System.DateTime Original_To, System.DateTime Original_From) {
-            return this.Update(RoomId, UserId, To, From, Original_Id, Original_RoomId, Original_UserId, Original_To, Original_From, Original_Id);
+        public virtual int Update(int RoomId, System.DateTime FromDate, System.DateTime ToDate, int Original_Id, int Original_RoomId, System.DateTime Original_FromDate, System.DateTime Original_ToDate) {
+            return this.Update(RoomId, FromDate, ToDate, Original_Id, Original_RoomId, Original_FromDate, Original_ToDate, Original_Id);
         }
     }
     

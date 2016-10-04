@@ -144,6 +144,11 @@ namespace HotelReservationApp
         private void btnBook_Click(object sender, EventArgs e)
         {
             // Check for invalid states
+            if (dateTimeFrom.Value.Date > dateTimeTo.Value.Date)
+            {
+                MessageBox.Show("You can't book a date range which defys the laws of nature!\nPlease change your selection.");
+                return;
+            }
             if (dateTimeFrom.Value.Date < DateTime.Now.Date)
             {
                 MessageBox.Show("You can't book a date that has already happened!\nPlease change your selection.");
@@ -154,6 +159,12 @@ namespace HotelReservationApp
                 MessageBox.Show("Please select a single row.");
                 return;
             }
+            
+
+            // Save values from dateTime form objects in references
+            DateTime selectedTo, selectedFrom;
+            selectedTo = dateTimeTo.Value;
+            selectedFrom = dateTimeFrom.Value;
 
             // Get the room number of the selected row from the dataset
             string selectedRowRoomNum = dataGridViewSSP.SelectedRows[0].Cells[0].Value.ToString();
@@ -173,17 +184,17 @@ namespace HotelReservationApp
                 to = sqlReader.GetDateTime(4);
                 from = sqlReader.GetDateTime(5);
 
-                DateTime selectedTo, selectedFrom;
-                selectedTo = dateTimeTo.Value;
-                selectedFrom = dateTimeFrom.Value;
-                bool case1, case2, case3;
+                
 
-                case1 = selectedFrom <  && (selectedFrom > to && selectedFrom < from);
-                case2 = false;
-                case3 = false;
+                // Case1: The selected range occurs before the booked date range
+                // Case2: The selected range occurs after the booked date range
+                // CLARIFICATION: The booking goes until midnight of the to date.
+                //                Therefore you cannot book a from date on a to date.
+                bool case1, case2;
+                case1 = selectedTo < from;
+                case2 = selectedFrom > to;
 
-                // TODO: Check logic, probably incorrect (Might be able to move this check into the sql statement)
-                if ((from > dateTimeFrom.Value && to < dateTimeTo.Value) || (to < dateTimeTo.Value && from > dateTimeFrom.Value))
+                if (!(case1 || case2))
                 {
                     // Handle conflict
                     MessageBox.Show("That room is booked at that time.\nPlease select a different room or time.");
@@ -192,9 +203,17 @@ namespace HotelReservationApp
                     return;
                 }
             }
-            MessageBox.Show("The room is available at that time.\nPlease press the 'Book' button to finalize you choice.");
-
             sqlReader.Close();
+
+            query = "INSERT INTO dbo.bookedTbl(RoomId, ToDate, FromDate) VALUES(@rId, @fromDate, @toDate);";
+            sqlCmd.CommandText = query;
+            sqlCmd.Parameters.AddWithValue("@rId", selectedRowRoomNum);
+            sqlCmd.Parameters.AddWithValue("@fromDate", selectedFrom);
+            sqlCmd.Parameters.AddWithValue("@toDate", selectedTo);
+            sqlCmd.ExecuteNonQuery();
+
+            MessageBox.Show("Your room has been booked.\nThank you for staying with us!");
+
             conn.Close();
         }
     }
