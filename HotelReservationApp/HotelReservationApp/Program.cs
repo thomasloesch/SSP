@@ -16,13 +16,15 @@ namespace HotelReservationApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Show log-in as dialog, if user logs in successfully, show MainForm
             SignInForm frmLogin = new SignInForm();
             if (frmLogin.ShowDialog() == DialogResult.OK)
             {
                 Application.Run(new MainForm(frmLogin.usrValidated));
                 frmLogin.Dispose();
             }
-            else
+            else // Otherwise exit
             {
                 Application.Exit();
             }

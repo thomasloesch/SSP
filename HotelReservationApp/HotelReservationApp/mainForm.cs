@@ -26,11 +26,6 @@ namespace HotelReservationApp
             usrName = _usrName;
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void main_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dbSSPDataSet.bookedTbl' table. You can move, or remove it, as needed.
@@ -43,6 +38,7 @@ namespace HotelReservationApp
             cmboBxRmType.SelectedIndex = 0;
             cmboBxNumBeds.SelectedIndex = 0;
 
+            // Set lblUser with current log-in user name
             lblUser.Text = "Logged in as:\n" + usrName;
         }
 
@@ -51,7 +47,7 @@ namespace HotelReservationApp
             // Set new query for database
             string sqlQuery = "SELECT RoomNum, RoomType, Beds, BedType, Price FROM roomTbl";
 
-            // Get current status of combo boxes and set query accordingly
+            // Add 'WHERE ...' section of query based on current values of comboBoxes
             if (cmboBxBedType.Text != "None" || cmboBxNumBeds.Text != "None" || cmboBxRmType.Text != "None")
             {
                 sqlQuery += " WHERE";
@@ -91,12 +87,15 @@ namespace HotelReservationApp
                 // Update the dataAdapter
                 roomTblTableAdapter.Adapter.SelectCommand.CommandText = sqlQuery;
                 this.roomTblTableAdapter.Fill(this.dbSSPDataSet.roomTbl);
+
+                // If dataSet is empty
                 if (this.dbSSPDataSet.roomTbl.Count == 0)
                 {
+                    // Display message
                     lblRooms.Text = "There are no rooms that match your preferences.";
                     lblRooms.Visible = true;
                 }
-                else
+                else // Otherwise hide message
                 {
                     lblRooms.Visible = false;
                 }
@@ -114,12 +113,16 @@ namespace HotelReservationApp
 
         private void radBtnSingle_CheckedChanged(object sender, EventArgs e)
         {
+            // When user selects radio button, enable second DateTime control
+            // and make sure they have the same value. 
             dateTimeTo.Enabled = false;
-            dateTimeTo.ResetText();
+            dateTimeTo.Value = dateTimeFrom.Value;
         }
 
         private void radBtnMultiple_CheckedChanged(object sender, EventArgs e)
         {
+            // When user selects radio button, enable second DateTime control
+            // and make sure they have the same value.
             dateTimeTo.Enabled = true;
             dateTimeTo.Value = dateTimeFrom.Value;
         }
@@ -150,7 +153,7 @@ namespace HotelReservationApp
                 lblBooked.Text = "This room currently has no bookings.";
                 lblBooked.Visible = true;
             }
-            else
+            else // Otherwise hide message
             {
                 lblBooked.Visible = false;
             }
@@ -194,9 +197,10 @@ namespace HotelReservationApp
                 string query = "SELECT * FROM dbo.bookedTbl WHERE RoomId='" + selectedRowRoomNum + "';";
                 SqlCommand sqlCmd = new SqlCommand(query, conn);
                 SqlDataReader sqlReader = sqlCmd.ExecuteReader();
+                // Check all the results for an intersection
                 while (sqlReader.Read())
                 {
-                    // Check if any booking intersect with selected dates
+                    // Initializations
                     DateTime to, from;
                     int toIndex = sqlReader.GetOrdinal("ToDate");
                     int fromIndex = sqlReader.GetOrdinal("FromDate");
@@ -243,12 +247,14 @@ namespace HotelReservationApp
 
         private void dateTimeFrom_ValueChanged(object sender, EventArgs e)
         {
+            // When only booking for one day, make sure both DateTime boxes are the same date
             if (radBtnSingle.Checked)
                 dateTimeTo.Value = dateTimeFrom.Value;
         }
 
         private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Show a new SignInForm and get new validated user
             SignInForm frmLogin = new SignInForm();
             if (frmLogin.ShowDialog() == DialogResult.OK)
             {
@@ -256,7 +262,7 @@ namespace HotelReservationApp
                 lblUser.Text = "Logged in as:\n" + usrName;
                 frmLogin.Dispose();
             }
-            else
+            else // Otherwise close the application
             {
                 Application.Exit();
             }

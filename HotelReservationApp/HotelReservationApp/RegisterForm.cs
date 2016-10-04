@@ -22,7 +22,7 @@ namespace HotelReservationApp
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            // Check to see if user entered data
+            // Check to see if user entered proper data
             if (txtBxName.Text.Length < 4)
             {
                 MessageBox.Show("Please use a longer username.");
@@ -46,9 +46,10 @@ namespace HotelReservationApp
                 SqlCommand sqlCmd = new SqlCommand(sqlQuery, conn);
                 SqlDataReader dbReader = sqlCmd.ExecuteReader();
 
+                // If a user with that name exists already, display an error message
                 if (dbReader.Read())
                     lblMessage.Text = "That name is already in use.";
-                else
+                else // Otherwise, add the username and password into the database
                 {
                     dbReader.Close();
 
@@ -67,6 +68,8 @@ namespace HotelReservationApp
                     int user_Id = dbReader.GetInt32(0);
                     dbReader.Close();
 
+                    // Try/catch block ensures that if there is an issue between the insertion
+                    // on usrTbl and passTbl, the new user is hopefully removed from usrTbl.
                     try
                     {
                         // Hash password

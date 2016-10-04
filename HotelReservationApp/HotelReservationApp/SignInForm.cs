@@ -23,7 +23,7 @@ namespace HotelReservationApp
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            // Check to see if user entered data
+            // Check to see if user entered proper data
             if (txtBxName.Text.Length < 4 || txtBxPass.Text.Length < 8)
             {
                 MessageBox.Show("The information you input is incorrect.");
@@ -43,11 +43,13 @@ namespace HotelReservationApp
                 SqlCommand sqlCmd = new SqlCommand(sqlQuery, conn);
                 SqlDataReader dbReader = sqlCmd.ExecuteReader();
 
+                // If the user exists, check password
                 if (dbReader.Read())
                 {
                     int userId = dbReader.GetInt32(0);
                     dbReader.Close();
-
+                     
+                    // Get stored hash and salt
                     sqlQuery = "SELECT Hash, Salt FROM dbo.passTbl WHERE Usr_Id = " + userId + ";";
                     sqlCmd.CommandText = sqlQuery;
                     dbReader = sqlCmd.ExecuteReader();
@@ -57,20 +59,22 @@ namespace HotelReservationApp
                     byte[] salt = Convert.FromBase64String(dbReader.GetString(1));
                     dbReader.Close();
 
+                    // Hash input password
                     byte[] inputHash = GenerateSaltedHash(Encoding.UTF8.GetBytes(txtBxPass.Text), salt);
 
+                    // If the stored hash and hashed input match, proceed to MainForm
                     if (CompareByteArrays(inputHash, storedHash))
                     {
                         MessageBox.Show("Welcome, " + txtBxName.Text + "!");
                         usrValidated = txtBxName.Text;
                         this.DialogResult = DialogResult.OK;
                     }
-                    else
+                    else // Otherwise, display an error message
                     {
                         MessageBox.Show("Your password is incorrect, please try again.");
                     }
                 }
-                else
+                else // If the user does not exist, display an error message
                 {
                     dbReader.Close();
                     MessageBox.Show("That user doesn't exist. Please register first.");
