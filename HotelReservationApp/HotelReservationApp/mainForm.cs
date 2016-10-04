@@ -13,9 +13,17 @@ namespace HotelReservationApp
 {
     public partial class MainForm : Form
     {
+        private string usrName;
+
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        public MainForm(string _usrName)
+        {
+            InitializeComponent();
+            usrName = _usrName;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -34,11 +42,8 @@ namespace HotelReservationApp
             cmboBxBedType.SelectedIndex = 0;
             cmboBxRmType.SelectedIndex = 0;
             cmboBxNumBeds.SelectedIndex = 0;
-        }
 
-        private void logInToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            lblUser.Text = "Logged in as:\n" + usrName;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -81,28 +86,30 @@ namespace HotelReservationApp
                 sqlQuery += ";";
             }
 
-            // Update the dataAdapter
-            roomTblTableAdapter.Adapter.SelectCommand.CommandText = sqlQuery;
-            this.roomTblTableAdapter.Fill(this.dbSSPDataSet.roomTbl);
-            if (this.dbSSPDataSet.roomTbl.Count == 0)
+            try
             {
-                lblRooms.Text = "There are no rooms that match your preferences.";
-                lblRooms.Visible = true;
+                // Update the dataAdapter
+                roomTblTableAdapter.Adapter.SelectCommand.CommandText = sqlQuery;
+                this.roomTblTableAdapter.Fill(this.dbSSPDataSet.roomTbl);
+                if (this.dbSSPDataSet.roomTbl.Count == 0)
+                {
+                    lblRooms.Text = "There are no rooms that match your preferences.";
+                    lblRooms.Visible = true;
+                }
+                else
+                {
+                    lblRooms.Visible = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                lblRooms.Visible = false;
+                MessageBox.Show("There was an error attempting to connect to the database.\n" + ex.Message);
             }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void btnCheck_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void radBtnSingle_CheckedChanged(object sender, EventArgs e)
@@ -126,9 +133,16 @@ namespace HotelReservationApp
             // Set new query for database
             string sqlQuery = "SELECT * FROM bookedTbl WHERE RoomId='" + selectedRoomId + "';";
 
-            // Update the dataAdapter
-            bookedTblTableAdapter.Adapter.SelectCommand.CommandText = sqlQuery;
-            this.bookedTblTableAdapter.Fill(this.dbSSPDataSet.bookedTbl);
+            try
+            {
+                // Update the dataAdapter
+                bookedTblTableAdapter.Adapter.SelectCommand.CommandText = sqlQuery;
+                this.bookedTblTableAdapter.Fill(this.dbSSPDataSet.bookedTbl);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was an error attempting to connect to the database.\n" + ex.Message);
+            }
 
             // Display message if no bookings
             if (this.dbSSPDataSet.bookedTbl.Count == 0)
@@ -170,60 +184,82 @@ namespace HotelReservationApp
             // Get the room number of the selected row from the dataset
             string selectedRowRoomNum = dataGridViewSSP.SelectedRows[0].Cells[0].Value.ToString();
 
-            // Establish connection to the database
-            string connectionString = @"Data Source=tloesch.database.windows.net;Initial Catalog=dbSSP;Integrated Security=False;User ID=tloesch;Password=Ssp12345;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            SqlConnection conn = new SqlConnection(connectionString);
-            conn.Open();
-
-            string query = "SELECT * FROM dbo.bookedTbl WHERE RoomId='" + selectedRowRoomNum + "';";
-            SqlCommand sqlCmd = new SqlCommand(query, conn);
-            SqlDataReader sqlReader = sqlCmd.ExecuteReader();
-            while (sqlReader.Read())
+            try
             {
-                // Check if any booking intersect with selected dates
-                DateTime to, from;
-                int toIndex = sqlReader.GetOrdinal("ToDate");
-                int fromIndex = sqlReader.GetOrdinal("FromDate");
-                to = sqlReader.GetDateTime(toIndex);
-                from = sqlReader.GetDateTime(fromIndex);
+                // Establish connection to the database
+                string connectionString = @"Data Source=tloesch.database.windows.net;Initial Catalog=dbSSP;Integrated Security=False;User ID=tloesch;Password=Ssp12345;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                SqlConnection conn = new SqlConnection(connectionString);
+                conn.Open();
 
-                
-
-                // Case1: The selected range occurs before the booked date range
-                // Case2: The selected range occurs after the booked date range
-                // CLARIFICATION: The booking goes until midnight of the to date.
-                //                Therefore you cannot book a from date on a to date.
-                bool case1, case2;
-                case1 = selectedTo < from;
-                case2 = selectedFrom > to;
-
-                if (!(case1 || case2))
+                string query = "SELECT * FROM dbo.bookedTbl WHERE RoomId='" + selectedRowRoomNum + "';";
+                SqlCommand sqlCmd = new SqlCommand(query, conn);
+                SqlDataReader sqlReader = sqlCmd.ExecuteReader();
+                while (sqlReader.Read())
                 {
-                    // Handle conflict
-                    MessageBox.Show("That room is booked at that time.\nPlease select a different room or time.");
-                    sqlReader.Close();
-                    conn.Close();
-                    return;
+                    // Check if any booking intersect with selected dates
+                    DateTime to, from;
+                    int toIndex = sqlReader.GetOrdinal("ToDate");
+                    int fromIndex = sqlReader.GetOrdinal("FromDate");
+                    to = sqlReader.GetDateTime(toIndex);
+                    from = sqlReader.GetDateTime(fromIndex);
+
+
+
+                    // Case1: The selected range occurs before the booked date range
+                    // Case2: The selected range occurs after the booked date range
+                    // CLARIFICATION: The booking goes until midnight of the to date.
+                    //                Therefore you cannot book a from date on a to date.
+                    bool case1, case2;
+                    case1 = selectedTo < from;
+                    case2 = selectedFrom > to;
+
+                    if (!(case1 || case2))
+                    {
+                        // Handle conflict
+                        MessageBox.Show("That room is booked at that time.\nPlease select a different room or time.");
+                        sqlReader.Close();
+                        conn.Close();
+                        return;
+                    }
                 }
+                sqlReader.Close();
+
+                query = "INSERT INTO dbo.bookedTbl(RoomId, FromDate, ToDate) VALUES(@rId, @fromDate, @toDate);";
+                sqlCmd.CommandText = query;
+                sqlCmd.Parameters.AddWithValue("@rId", selectedRowRoomNum);
+                sqlCmd.Parameters.AddWithValue("@fromDate", selectedFrom);
+                sqlCmd.Parameters.AddWithValue("@toDate", selectedTo);
+                sqlCmd.ExecuteNonQuery();
+
+                MessageBox.Show("Your room has been booked.\nThank you for staying with us!");
+
+                conn.Close();
             }
-            sqlReader.Close();
-
-            query = "INSERT INTO dbo.bookedTbl(RoomId, FromDate, ToDate) VALUES(@rId, @fromDate, @toDate);";
-            sqlCmd.CommandText = query;
-            sqlCmd.Parameters.AddWithValue("@rId", selectedRowRoomNum);
-            sqlCmd.Parameters.AddWithValue("@fromDate", selectedFrom);
-            sqlCmd.Parameters.AddWithValue("@toDate", selectedTo);
-            sqlCmd.ExecuteNonQuery();
-
-            MessageBox.Show("Your room has been booked.\nThank you for staying with us!");
-
-            conn.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was an error attempting to connect to the database.\n" + ex.Message);
+            }
         }
 
         private void dateTimeFrom_ValueChanged(object sender, EventArgs e)
         {
             if (radBtnSingle.Checked)
                 dateTimeTo.Value = dateTimeFrom.Value;
+        }
+
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SignInForm frmLogin = new SignInForm();
+            if (frmLogin.ShowDialog() == DialogResult.OK)
+            {
+                usrName = frmLogin.usrValidated;
+                lblUser.Text = "Logged in as:\n" + usrName;
+                frmLogin.Dispose();
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
     }
 }

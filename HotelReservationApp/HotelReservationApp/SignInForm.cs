@@ -14,6 +14,8 @@ namespace HotelReservationApp
 {
     public partial class SignInForm : Form
     {
+        public string usrValidated;
+
         public SignInForm()
         {
             InitializeComponent();
@@ -28,49 +30,58 @@ namespace HotelReservationApp
                 return;
             }
 
-            // Establish connection with the database
-            string dbConnection = @"Data Source=tloesch.database.windows.net;Initial Catalog=dbSSP;Integrated Security=False;User ID=tloesch;Password=Ssp12345;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            SqlConnection conn = new SqlConnection(dbConnection);
-            conn.Open();
-
-            //Check to see if name is in DB
-            string sqlQuery = "SELECT Id FROM dbo.userTbl WHERE UserName = '" + txtBxName.Text + "';";
-            SqlCommand sqlCmd = new SqlCommand(sqlQuery, conn);
-            SqlDataReader dbReader = sqlCmd.ExecuteReader();
-
-            if (dbReader.Read())
+            try
             {
-                int userId = dbReader.GetInt32(0);
-                dbReader.Close();
+                // Establish connection with the database
+                string dbConnection = @"Data Source=tloesch.database.windows.net;Initial Catalog=dbSSP;Integrated Security=False;User ID=tloesch;Password=Ssp12345;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                SqlConnection conn = new SqlConnection(dbConnection);
+                conn.Open();
 
-                sqlQuery = "SELECT Hash, Salt FROM dbo.passTbl WHERE Usr_Id = " + userId + ";";
-                sqlCmd.CommandText = sqlQuery;
-                dbReader = sqlCmd.ExecuteReader();
 
-                dbReader.Read();
-                byte[] storedHash = Convert.FromBase64String(dbReader.GetString(0));
-                byte[] salt = Convert.FromBase64String(dbReader.GetString(1));
-                dbReader.Close();
+                //Check to see if name is in DB
+                string sqlQuery = "SELECT Id FROM dbo.userTbl WHERE UserName = '" + txtBxName.Text + "';";
+                SqlCommand sqlCmd = new SqlCommand(sqlQuery, conn);
+                SqlDataReader dbReader = sqlCmd.ExecuteReader();
 
-                byte[] inputHash = GenerateSaltedHash(Encoding.UTF8.GetBytes(txtBxPass.Text), salt);
-
-                if(CompareByteArrays(inputHash, storedHash))
+                if (dbReader.Read())
                 {
-                    MessageBox.Show("Welcome, " + txtBxName.Text + "!");
-                    this.DialogResult = DialogResult.OK;
+                    int userId = dbReader.GetInt32(0);
+                    dbReader.Close();
+
+                    sqlQuery = "SELECT Hash, Salt FROM dbo.passTbl WHERE Usr_Id = " + userId + ";";
+                    sqlCmd.CommandText = sqlQuery;
+                    dbReader = sqlCmd.ExecuteReader();
+
+                    dbReader.Read();
+                    byte[] storedHash = Convert.FromBase64String(dbReader.GetString(0));
+                    byte[] salt = Convert.FromBase64String(dbReader.GetString(1));
+                    dbReader.Close();
+
+                    byte[] inputHash = GenerateSaltedHash(Encoding.UTF8.GetBytes(txtBxPass.Text), salt);
+
+                    if (CompareByteArrays(inputHash, storedHash))
+                    {
+                        MessageBox.Show("Welcome, " + txtBxName.Text + "!");
+                        usrValidated = txtBxName.Text;
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your password is incorrect, please try again.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Your password is incorrect, please try again.");
+                    dbReader.Close();
+                    MessageBox.Show("That user doesn't exist. Please register first.");
                 }
-            }
-            else
-            {
-                dbReader.Close();
-                MessageBox.Show("That user doesn't exist. Please register first.");
-            }
 
-            conn.Close();
+                conn.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("There was an error attempting to connect to the database.\n" + ex.Message);
+            }
         }
 
         private void btnRegister_Click(object sender, EventArgs e)

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dateTimeFrom = new System.Windows.Forms.DateTimePicker();
             this.dateTimeTo = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -72,6 +72,7 @@
             this.roomIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FromDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ToDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblUser = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -123,8 +124,9 @@
             // signOutToolStripMenuItem
             // 
             this.signOutToolStripMenuItem.Name = "signOutToolStripMenuItem";
-            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.signOutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.signOutToolStripMenuItem.Text = "Sign Out";
+            this.signOutToolStripMenuItem.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
             // 
             // optionToolStripMenuItem
             // 
@@ -298,9 +300,9 @@
             this.groupBox2.Controls.Add(this.btnBook);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.dateTimeTo);
-            this.groupBox2.Location = new System.Drawing.Point(477, 27);
+            this.groupBox2.Location = new System.Drawing.Point(498, 27);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(315, 143);
+            this.groupBox2.Size = new System.Drawing.Size(294, 143);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Booking";
@@ -335,8 +337,8 @@
             this.dataGridViewSSP.AllowUserToDeleteRows = false;
             this.dataGridViewSSP.AllowUserToResizeColumns = false;
             this.dataGridViewSSP.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewSSP.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewSSP.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewSSP.AutoGenerateColumns = false;
             this.dataGridViewSSP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewSSP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -421,8 +423,8 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -498,11 +500,21 @@
             this.ToDate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ToDate.Width = 45;
             // 
+            // lblUser
+            // 
+            this.lblUser.Location = new System.Drawing.Point(384, 37);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(108, 125);
+            this.lblUser.TabIndex = 20;
+            this.lblUser.Text = "Logged in as:";
+            this.lblUser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 453);
+            this.Controls.Add(this.lblUser);
             this.Controls.Add(this.lblBooked);
             this.Controls.Add(this.lblRooms);
             this.Controls.Add(this.dataGridView1);
@@ -577,6 +589,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn roomIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FromDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ToDate;
+        private System.Windows.Forms.Label lblUser;
     }
 }
 
